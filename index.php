@@ -19,6 +19,7 @@ ob_start();
       rel="stylesheet"
       href="https://unpkg.com/papercss@1.9.0/dist/paper.css"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
 	
@@ -161,14 +162,41 @@ $('.close-modal').click(function(){
 });
 </script>
 	<script src="vendor/login/js/main.js"></script>
-
+<script>
+let timerInterval
+Swal.fire({
+  title: 'Terima kasih sudah mengisi!',
+  html: 'Pesan dan kesan anda akan menjadi pelajaran untuk menjadi lebih baik lagi',
+  icon: 'success',
+  timer: 5000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
+</script>
 <?php
 @$Nama = $_POST['Nama'];
+$resultn = preg_replace("/[^a-zA-Z0-9]/", "", $Nama);
 @$Sekolah = $_POST['Sekolah'];
+$results = preg_replace("/[^a-zA-Z0-9]/", "", $Sekolah);
 @$Pesan = $_POST['Pesan'];
+$resultp = preg_replace("/[^a-zA-Z0-9]/", "", $Pesan);
 @$submit = $_POST['submit'];
 if(isset($_POST) && isset( $_POST['submit'] ) ){
-    $query_insert= "INSERT INTO tb_tamu (Nama,Sekolah,Pesan) VALUES ('$Nama','$Sekolah','$Pesan')";
+    $query_insert= "INSERT INTO tb_tamu (Nama,Sekolah,Pesan) VALUES ('$resultn','$results','$resultp')";
     $hasil = mysqli_query($koneksi_db, $query_insert) or die ("ERROR INSERT DATA");
      if($hasil){
             header('Location: '.$_SERVER['PHP_SELF']);
