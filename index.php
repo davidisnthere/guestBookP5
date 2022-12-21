@@ -189,11 +189,11 @@ Swal.fire({
 </script>
 <?php
 @$Nama = $_POST['Nama'];
-$resultn = preg_replace("/[^a-zA-Z0-9]/", "", $Nama);
+$resultn = preg_replace("/[^a-zA-Z0-9 ]/", "", $Nama);
 @$Sekolah = $_POST['Sekolah'];
-$results = preg_replace("/[^a-zA-Z0-9]/", "", $Sekolah);
+$results = preg_replace("/[^a-zA-Z0-9 ]/", "", $Sekolah);
 @$Pesan = $_POST['Pesan'];
-$resultp = preg_replace("/[^a-zA-Z0-9]/", "", $Pesan);
+$resultp = preg_replace("/[^a-zA-Z0-9 ]/", "", $Pesan);
 @$submit = $_POST['submit'];
 if(isset($_POST) && isset( $_POST['submit'] ) ){
     $query_insert= "INSERT INTO tb_tamu (Nama,Sekolah,Pesan) VALUES ('$resultn','$results','$resultp')";
