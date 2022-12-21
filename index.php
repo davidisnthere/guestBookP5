@@ -187,6 +187,18 @@ Swal.fire({
   }
 })
 </script>
+<script>
+$("#kirim").submit(function (e) {
+    // Check if we have submitted before
+    if ( $("#submit").attr('attempted') == 'true' ) {
+      //stop submitting the form because we have already clicked submit.
+      e.preventDefault();
+    }
+    else {
+      $("#submit").attr("attempted", 'true');
+    }
+  });
+</script>
 <?php
 @$Nama = $_POST['Nama'];
 $resultn = preg_replace("/[^a-zA-Z0-9 ]/", "", $Nama);
