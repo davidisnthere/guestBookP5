@@ -72,7 +72,7 @@ ob_start();
 						</span>
 					</div>
 					<div class="container-login100-form-btn">
-						<input type="submit" name="submit" value="kirim!" class="login100-form-btn">
+						<input type="submit" name="submit" value="kirim!" class="login100-form-btn" id="submit">
 					</div>
 					</div>
 					<div class="row">
@@ -164,6 +164,7 @@ $('.close-modal').click(function(){
 	<script src="vendor/login/js/main.js"></script>
 <script>
 let timerInterval
+
 Swal.fire({
   title: 'Terima kasih sudah mengisi!',
   html: 'Pesan dan kesan anda akan menjadi pelajaran untuk menjadi lebih baik lagi',
@@ -201,11 +202,11 @@ $("#kirim").submit(function (e) {
 </script>
 <?php
 @$Nama = $_POST['Nama'];
-$resultn = preg_replace("/[^a-zA-Z0-9 ]/", "", $Nama);
+$resultn=htmlspecialchars($Nama);
 @$Sekolah = $_POST['Sekolah'];
-$results = preg_replace("/[^a-zA-Z0-9 ]/", "", $Sekolah);
+$results=htmlspecialchars($Sekolah);
 @$Pesan = $_POST['Pesan'];
-$resultp = preg_replace("/[^a-zA-Z0-9 ]/", "", $Pesan);
+$resultp = htmlspecialchars($Pesan);
 @$submit = $_POST['submit'];
 if(isset($_POST) && isset( $_POST['submit'] ) ){
     $query_insert= "INSERT INTO tb_tamu (Nama,Sekolah,Pesan) VALUES ('$resultn','$results','$resultp')";
