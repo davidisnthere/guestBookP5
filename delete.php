@@ -18,7 +18,7 @@ $ID=$_GET['ID'];
 $query_delete="DELETE FROM tb_tamu WHERE ID='$ID';";
 $hasil = mysqli_query($koneksi_db, $query_delete);
 if($hasil){
-    header('Location: index.php');
+    header('Location: admin.php');
 }else {
         echo "Gagal Hapus Data";
     
